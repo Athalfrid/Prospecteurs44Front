@@ -1,3 +1,10 @@
-.spacer {
-    flex: 1 1 auto;
+.navbar-links{
+    background: orange; /*Couleur choisi par l'association*/
+    display: flex;
+}
+
+a[mat-button]{
+    /*Permet de modifier l'apparence des buttons dans ma navbar*/
+    background: transparent;
+    color:white;
 }

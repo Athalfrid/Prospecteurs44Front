@@ -1,0 +1,7 @@
+<h2>{{ alerte.titreAlerte }}</h2>
+<p><strong>Date :</strong> {{ alerte.dateObjetPerdu | date : "longDate" }}</p>
+<p><strong>Lieu :</strong> {{ alerte.lieuObjetPerdu }}</p>
+<p><strong>Description :</strong> {{ alerte.descriptionAlerte }}</p>
+<p><strong>Contact :</strong> {{ alerte.email }}</p>
+<button (click)="participateToAlert()" >Je veux aider</button>
+<button mat-raised-button mat-dialog-close color="primary" class="btn-orange">Fermer</button>

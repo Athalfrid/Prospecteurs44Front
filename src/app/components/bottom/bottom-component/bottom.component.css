@@ -1,0 +1,36 @@
+.footer {
+  background-color: orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  height: 100%;
+}
+
+.footer-link {
+  color: white;
+  text-decoration: underline;
+}
+
+.footer-link:hover {
+  text-decoration: none;
+}
+
+.social-icons a {
+  color: white;
+  text-decoration: none;
+  margin: 0 0.5rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.social-icons i {
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .footer .d-flex {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}

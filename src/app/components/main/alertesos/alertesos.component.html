@@ -1,0 +1,73 @@
+<div class="container">
+  <h1>⚠️ Alerte SOS - Objets perdus</h1>
+  <p>
+    Vous avez perdu un objet durant une sortie ? Déclarez-le ici pour alerter
+    les membres de l’association. Un bénévole pourra peut-être vous aider à le
+    retrouver ! 🧭
+  </p>
+
+  <form [formGroup]="alerteForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="form-group">
+      <label for="titreAlerte">Titre de l'alerte</label>
+      <input
+        id="titreAlerte"
+        formControlName="titreAlerte"
+        type="text"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="descriptionAlerte">Description</label>
+      <textarea
+        id="descriptionAlerte"
+        formControlName="descriptionAlerte"
+        rows="3"
+        required
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="lieuObjetPerdu">Lieu de perte</label>
+      <input
+        id="lieuObjetPerdu"
+        formControlName="lieuObjetPerdu"
+        type="text"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="dateObjetPerdu">Date de perte</label>
+      <input
+        id="dateObjetPerdu"
+        formControlName="dateObjetPerdu"
+        type="date"
+        required
+        onkeydown="return false"
+        onclick="this.showPicker && this.showPicker()"
+      />
+    </div>
+    <div
+      *ngIf="
+        alerteForm.get('dateObjetPerdu')?.touched &&
+        alerteForm.get('dateObjetPerdu')?.invalid
+      "
+      class="error"
+    >
+      <p *ngIf="alerteForm.get('dateObjetPerdu')?.errors?.['required']">
+        La date est obligatoire.
+      </p>
+      <p *ngIf="alerteForm.get('dateObjetPerdu')?.errors?.['invalidDate']">
+        La date saisie est invalide ou n’existe pas.
+      </p>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Votre email</label>
+      <input id="email" formControlName="email" type="email" required />
+    </div>
+
+    <button type="submit">Envoyer l’alerte</button>
+  </form>
+</div>

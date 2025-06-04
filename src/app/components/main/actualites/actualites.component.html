@@ -1,0 +1,35 @@
+<!-- Si une news est sélectionnée, on affiche le détail seul -->
+<div *ngIf="selectedNewsId !== null; else newsList">
+  <mat-card class="news-detail-card">
+    <img mat-card-image [src]="getNewsById(selectedNewsId)?.photo" alt="Photo" class="details-image" />
+    <mat-card-content>
+      <h2>{{ getNewsById(selectedNewsId)?.title }}</h2>
+      <p class="text-muted">{{ getNewsById(selectedNewsId)?.date }}</p>
+      <p>{{ getNewsById(selectedNewsId)?.content }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="closeDetail()">Retour</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<!-- Sinon, on affiche la liste -->
+<ng-template #newsList>
+  <mat-grid-list cols="2" gutterSize="16px" rowHeight="200px">
+    <mat-grid-tile *ngFor="let news of currentNews">
+      <mat-card (click)="handleClick(news.id)" class="news-card">
+        <img mat-card-image [src]="news.photo" [alt]="news.title"
+          [ngStyle]="{
+            width: expandedImage === news.id ? '300px' : '150px',
+            height: expandedImage === news.id ? '300px' : '150px',
+            objectFit: 'cover',
+            transition: 'all 0.3s ease'
+          }" />
+        <mat-card-content>
+          <h3>{{ news.title }}</h3>
+          <p class="text-muted">{{ news.date }}</p>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</ng-template>

@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './bottom.component.css'
 })
 export class BottomComponent {
+  currentYear : number = new Date().getFullYear();
 
 }

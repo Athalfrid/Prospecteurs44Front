@@ -1,1 +1,30 @@
-<p>bottom-component works!</p>
+<footer class="footer">
+  <div class="text-center">
+
+    <!-- LIGNE 1 -->
+    <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3">
+      <div>
+        <a routerLink="/mentions-legales" class="footer-link">Mentions légales</a> |
+        <a routerLink="/privacy" class="footer-link">Politique de confidentialité</a>
+      </div>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/Prospecteurs44/?locale=fr_FR" target="_blank" rel="noopener" aria-label="Facebook">
+          <i class="fab fa-facebook fa-lg"></i>
+        </a>
+        <a href="https://www.helloasso.com/associations/prospecteurs44" target="_blank" rel="noopener" aria-label="HelloAsso" class="ms-3">
+          HelloAsso
+        </a>
+      </div>
+    </div>
+
+    <!-- LIGNE 2 -->
+    <div class="m-2">
+      <p>
+        Développé avec ❤️ par
+        <strong>
+          <a href="https://github.com/Athalfrid" target="_blank" rel="noopener noreferrer" class="footer-link">Aurélien ROBIN</a>
+        </strong> &copy; {{ currentYear }} Tous droits réservés.</p>
+    </div>
+
+  </div>
+</footer>

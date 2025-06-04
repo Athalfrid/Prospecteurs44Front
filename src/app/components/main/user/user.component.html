@@ -1,0 +1,29 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <mat-nav-list>
+      <mat-list-item
+        (click)="selectView('profil')"
+        [class.active]="currentView === 'profil'"
+        >Mon Profil</mat-list-item
+      >
+      <mat-list-item
+        (click)="selectView('alertes')"
+        [class.active]="currentView === 'alertes'"
+        >Mes Alertes</mat-list-item
+      >
+      <mat-list-item
+        (click)="selectView('autre')"
+        [class.active]="currentView === 'autre'"
+        >Autre</mat-list-item
+      >
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <ng-container [ngSwitch]="currentView">
+      <div *ngSwitchCase="'profil'">Contenu Profil</div>
+      <div *ngSwitchCase="'alertes'">Contenu Alertes</div>
+      <div *ngSwitchDefault>Autre contenu</div>
+    </ng-container>
+  </mat-sidenav-content>
+</mat-sidenav-container>

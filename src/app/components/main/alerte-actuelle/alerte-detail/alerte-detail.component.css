@@ -1,0 +1,56 @@
+:host {
+  display: block;
+  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  max-width: 500px;
+}
+
+h2 {
+  margin-top: 0;
+  font-weight: 700;
+  color: #1976d2; /* Bleu Material */
+  text-align: center;
+}
+
+p {
+  margin: 10px 0;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+p strong {
+  color: #555;
+}
+
+button {
+  display: block;
+  margin: 20px auto 0 auto;
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-orange {
+  background-color: orange; /* orange vif */
+  color: white;             /* texte blanc */
+  text-decoration: none;    /* pas de soulignement */
+  box-shadow: none;         /* sans ombre */
+}
+
+button:hover {
+  background-color: #e65c00; /* orange un peu plus foncé au survol */
+  box-shadow: none;          /* toujours sans ombre */
+}
+
+
+/* Ajout d’une petite ombre douce autour du dialog */
+.mat-dialog-container {
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(25, 118, 210, 0.3);
+}

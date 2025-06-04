@@ -1,0 +1,152 @@
+<mat-card class="form-container card shadow p-4">
+  <h2 class="text-center mb-4">Inscription</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+        <mat-label>Pseudo</mat-label>
+        <input matInput formControlName="pseudo" required />
+      </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+      <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" required />
+      </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+      <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+        <mat-label>Mot de passe</mat-label>
+        <input matInput formControlName="password" required type="password" />
+      </mat-form-field>
+    </div>
+
+    <div class="form-check mb-3">
+      <mat-checkbox formControlName="isParrained"
+        >Je suis parrainé(e)</mat-checkbox
+      >
+    </div>
+
+    <div class="mb-3" @slideFade>
+      <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+        <mat-label>Email du parrain</mat-label>
+        <input
+          matInput
+          formControlName="emailParrain"
+          type="email"
+          [disabled]="!form.get('isParrained')?.value"
+        />
+      </mat-form-field>
+    </div>
+
+    <!-- Partie infos personnelles -->
+    <fieldset
+      style="
+        border: 2px solid #3f51b5;
+        border-radius: 8px;
+        padding: 16px;
+        margin-top: 24px;
+      "
+    >
+      <legend style="font-weight: bold; color: #3f51b5; padding: 0 8px">
+        Informations personnelles
+      </legend>
+
+      <div class="mb-3">
+        <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+          <mat-label>Nom</mat-label>
+          <input matInput formControlName="nom" required />
+        </mat-form-field>
+      </div>
+
+      <div class="mb-3">
+        <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+          <mat-label>Prénom</mat-label>
+          <input matInput formControlName="prenom" required />
+        </mat-form-field>
+      </div>
+
+      <div class="mb-3">
+        <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+          <mat-label>Date de naissance</mat-label>
+          <input
+            matInput
+            formControlName="dateNaissance"
+            required
+            type="date"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="mb-3">
+        <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+          <mat-label>Code postal</mat-label>
+          <input
+            matInput
+            formControlName="codePostal"
+            maxlength="5"
+            (keypress)="onlyNumber($event)"
+          />
+          <button
+            *ngIf="form.get('codePostal')?.value"
+            mat-icon-button
+            matSuffix
+            aria-label="Clear"
+            (click)="form.get('codePostal')?.setValue('')"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+
+      <div class="mb-3" *ngIf="villes.length > 0">
+        <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+          <mat-label>Ville</mat-label>
+          <mat-select formControlName="ville">
+            <mat-option *ngFor="let ville of villes" [value]="ville">
+              {{ ville }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="mb-3">
+        <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+          <mat-label>Téléphone</mat-label>
+          <input
+            matInput
+            formControlName="telephone"
+            maxlength="10"
+            (keypress)="onlyNumber($event)"
+          />
+          <button
+            *ngIf="form.get('telephone')?.value"
+            mat-icon-button
+            matSuffix
+            aria-label="Clear"
+            (click)="form.get('telephone')?.setValue('')"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </fieldset>
+
+    <div class="text-center">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!form.valid"
+      >
+        S'inscrire
+      </button>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-backend">
+      {{ errorMessage }}
+    </div>
+  </form>
+</mat-card>

@@ -1,6 +1,21 @@
-<mat-toolbar color="primary">
-    <span>Mon Application</span>
-
-    <span class="spacer"></span>
-    <a mat-button routerLink="/">Accueil</a>
-</mat-toolbar>
+<nav class="navbar-links">
+  <a mat-button routerLink="/"> <mat-icon>home</mat-icon> Prospecteurs44 </a>
+  <a mat-button routerLink="/association">
+    <mat-icon>info</mat-icon> À propos de l'association
+  </a>
+  <a mat-button routerLink="/actualites">Actualitées</a>
+  <a mat-button routerLink="/alertesos">AlerteSOS</a>
+  <a mat-button routerLink="/contact"> <mat-icon>mail</mat-icon> Contact </a>
+  <ng-container *ngIf="!authService.isLoggedIn()">
+    <a mat-button routerLink="/register"> Inscription </a>
+    <a mat-button routerLink="/login"> Login </a>
+  </ng-container>
+  <ng-container *ngIf="authService.isLoggedIn()">
+    <!--TODO:Ajouter les liens nécessitant une Authentification-->
+    <a mat-button routerLink="/events">Évènements</a>
+    <a mat-button routerLink="/alerteEncours">Alertes en cours</a>
+    <a mat-button routerLink="/user">Profil</a>
+    <a mat-button routerLink="/forum">Forum</a>
+    <a mat-button (click)="onLogout()">Logout</a>
+  </ng-container>
+</nav>

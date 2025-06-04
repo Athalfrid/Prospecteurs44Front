@@ -1,0 +1,36 @@
+.loading-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  gap: 1rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-muted {
+  color: gray;
+}
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.news-card {
+  display: flex;
+  width: 500px;
+  height: 200px;
+  gap: 1rem;
+  cursor: pointer;
+  align-items: flex-start;
+}
+
+.news-detail-card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

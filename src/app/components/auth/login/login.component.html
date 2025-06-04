@@ -1,0 +1,34 @@
+<mat-card class="form-container card shadow p-4">
+  <h2 class="text-center mb-4">Connexion</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" required />
+      </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+      <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+        <mat-label>Mot de passe</mat-label>
+        <input matInput formControlName="password" required type="password" />
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-backend">
+      {{ errorMessage }}
+    </div>
+
+    <div class="text-center">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!form.valid"
+      >
+        Se connecter
+      </button>
+    </div>
+  </form>
+</mat-card>
