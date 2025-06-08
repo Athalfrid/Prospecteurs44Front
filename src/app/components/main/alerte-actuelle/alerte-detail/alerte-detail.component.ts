@@ -7,7 +7,7 @@ import {
 import { AlerteSosDTO } from '../../../../dto/alerte-sos.dto';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { AlerteSosService } from '../../../../services/alerte-sos.service';
+import { AlerteSosService } from '../../../../services/alerte-sos/alerte-sos.service';
 import { SuccessDialogComponent } from '../../../shared/success-dialog/success-dialog.component';
 
 @Component({

@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../../../services/auth.services';
+import { AuthService } from '../../../services/auth/auth.services';
 
 import {
   trigger,
@@ -24,7 +24,7 @@ import {
   transition,
   animate,
 } from '@angular/animations';
-import { GeoService } from '../../../services/geo.services';
+import { GeoService } from '../../../services/geo/geo.services';
 import { MatIconModule } from '@angular/material/icon';
 import {
   InformationsPersonnellesDTO,

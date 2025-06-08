@@ -5,14 +5,14 @@
     <div class="mb-3">
       <mat-form-field appearance="fill" class="w-100" floatLabel="always">
         <mat-label>Email</mat-label>
-        <input matInput formControlName="email" required />
+        <input matInput formControlName="email" required (keydown.enter)="onSubmit()"/>
       </mat-form-field>
     </div>
 
     <div class="mb-3">
       <mat-form-field appearance="fill" class="w-100" floatLabel="always">
         <mat-label>Mot de passe</mat-label>
-        <input matInput formControlName="password" required type="password" />
+        <input matInput formControlName="password" required type="password" (keydown.enter)="onSubmit()" />
       </mat-form-field>
     </div>
 

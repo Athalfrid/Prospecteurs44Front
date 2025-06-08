@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit,  ViewChild } from '@angular/core';
-import { AlerteSosService } from '../../../services/alerte-sos.service';
+import { AlerteSosService } from '../../../services/alerte-sos/alerte-sos.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -89,9 +89,5 @@ export class AlerteActuelleComponent implements OnInit, AfterViewInit {
     this.dialog.open(AlerteDetailComponent,{
       data: element
     })
-  }
-
-  onRowClicked(row:any){
-    this.openDetails(row);
   }
 }

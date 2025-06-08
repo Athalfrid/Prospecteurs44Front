@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AlerteSosService } from '../../../services/alerte-sos.service';
+import { AlerteSosService } from '../../../services/alerte-sos/alerte-sos.service';
 
 import { SuccessDialogComponent } from '../../shared/success-dialog/success-dialog.component';
 import { MatDialog } from '@angular/material/dialog';

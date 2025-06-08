@@ -7,6 +7,18 @@ export interface InformationsPersonnellesDTO {
   telephone?: string;
 }
 
+export interface User {
+  userId: number;
+  userPseudo: string;
+  email: string;
+  password?: string;
+  role: string;
+  userParrain?: User;
+  filleuls?: User[];
+  dateInscription: string;
+  informationsPersonnelles: InformationsPersonnellesDTO;
+}
+
 export interface RegisterDTO {
   pseudo: string;
   email: string;

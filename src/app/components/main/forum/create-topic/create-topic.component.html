@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Créer un nouveau Topic</h1>
+<div mat-dialog-content>
+  <p>Veuillez renseigner les informations du nouveau topic :</p>
+  <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>Titre du Topic</mat-label>
+    <input matInput [(ngModel)]="data.title" name="title" required>
+  </mat-form-field>
+  <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>Description du Topic</mat-label>
+    <textarea matInput [(ngModel)]="data.content" name="content" required rows="4"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">Annuler</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="data" [disabled]="!data.title || !data.content" (click)="onCreateClick()">Créer</button>
+</div>

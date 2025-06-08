@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { min, Observable, tap } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { RegisterDTO } from '../dto/register.dto';
+import { RegisterDTO } from '../../dto/register.dto';
 
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 /**
  * Interface représentant la structure de la réponse à l'authentification.

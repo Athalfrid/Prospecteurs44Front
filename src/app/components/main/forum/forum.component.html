@@ -1,1 +1,70 @@
-<p>forum works!</p>
+<div class="forum-container">
+  <mat-grid-list cols="2" rowHeight="100px" gutterSize="16px">
+    <mat-grid-tile>
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label>Filtrer les topics</mat-label>
+        <input matInput />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <div style="display: flex; justify-content: flex-end; width: 100%;">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="openCreateTopicDialog()"
+        >
+          Créer un nouveau topic
+        </button>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <mat-divider class="my-20"></mat-divider>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Titre</th>
+        <td mat-cell *matCellDef="let topic">{{ topic.title }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="content">
+        <th mat-header-cell *matHeaderCellDef>Contenu</th>
+        <td mat-cell *matCellDef="let topic">
+          {{ topic.content | slice: 0:50 }}{{ topic.content.length > 50 ? '...' : '' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date_dernier_message">
+        <th mat-header-cell *matHeaderCellDef>Date dernier message</th>
+        <td mat-cell *matCellDef="let topic">
+          {{ getLastMessageContent(topic) }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef style="text-align: center;">Actions</th>
+        <td mat-cell *matCellDef="let topic" style="text-align: center;">
+          <button mat-button color="accent" (click)="openConversation(topic)">
+             {{topic.messages.length > 0 ? 'Accéder' : 'Nouveau message'}}
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    
+    <div *ngIf="dataSource.data.length === 0" class="no-content-message">
+      <p>Aucun topic pour le moment. Soyez le premier à en créer un !</p>
+    </div>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      showFirstLastButtons
+      aria-label="Select page of topics"
+    ></mat-paginator>
+  </div>
+</div>

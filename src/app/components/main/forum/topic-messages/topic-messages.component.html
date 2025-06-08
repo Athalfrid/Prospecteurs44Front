@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>{{ topicTitle }}</h2>
+
+<mat-dialog-content class="messages-container">
+  <mat-list>
+    <mat-list-item *ngFor="let msg of topic.messages" class="message-item">
+      <mat-icon matListItemIcon>account_circle</mat-icon>
+      <div class="message-content">
+        <div class="message-text">{{ msg.content }}</div>
+        <div class="message-meta">{{ msg.author.userPseudo }} - {{ msg.createdAt | date:'short' }}</div>
+      </div>
+    </mat-list-item>
+  </mat-list>
+</mat-dialog-content>
+
+<mat-dialog-actions class="message-input-container">
+  <mat-form-field appearance="outline" class="input-message">
+    <input
+      matInput
+      placeholder="Écrire un message..."
+      [(ngModel)]="newMessageContent"
+      (keyup.enter)="postMessage()"
+    />
+  </mat-form-field>
+  <button mat-flat-button color="primary" (click)="postMessage()" [disabled]="!newMessageContent.trim()">
+    Envoyer
+  </button>
+</mat-dialog-actions>
