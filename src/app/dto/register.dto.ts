@@ -27,3 +27,4 @@ export interface RegisterDTO {
   emailParrain?: string;
   informationsPersonnelles: InformationsPersonnellesDTO;
 }
+

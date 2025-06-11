@@ -8,5 +8,5 @@ export interface TopicDTO {
   updatedAt?: string;      // nullable, optionnel
   isClosed?: boolean;
   closedAt?: string;       // nullable, optionnel
-  messages?: TopicMessagesDTO[];  // liste de messages, optionnelle aussi
+  messages?: TopicMessagesDTO | null;  // liste de messages, optionnelle aussi
 }

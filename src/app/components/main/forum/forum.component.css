@@ -59,3 +59,15 @@ table[mat-table] {
 mat-paginator {
   border-top: 1px solid #e0e0e0;
 }
+.even-row {
+  background-color: #dddcdc;
+}
+
+.custum-header-row{
+  background-color: orange;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+

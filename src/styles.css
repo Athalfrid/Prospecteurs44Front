@@ -12,3 +12,13 @@ html, body {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+::ng-deep .mat-dialog-container.create-topic {
+  width: 80vw !important;
+  height: 80vh !important;
+  max-width: 90vw !important;
+  max-height: 90vh !important;
+  border-radius: 20px;
+  padding: 1rem;
+  box-sizing: border-box;
+}

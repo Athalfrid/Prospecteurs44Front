@@ -59,11 +59,10 @@ export class TopicMessagesDialogComponent implements OnInit {
     this.topic = this.data.topic;
     this.topicId = this.data.topicId!;
     this.topicTitle = this.data.topicTitle || '';
-    this.messages = this.data.messages || [];
+    //this.messages = this.data.messages || [];
   }
 
   ngOnInit(): void {
-
     if (this.topic && this.topic.id) {
       this.loadMessages(this.topic.id);
     }
@@ -77,16 +76,26 @@ export class TopicMessagesDialogComponent implements OnInit {
           (a: TopicMessagesDTO, b: TopicMessagesDTO) => {
             const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
             const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
-            return dateB - dateA;
+            return dateA - dateB;
           }
         );
         this.isLoadingMessages = false;
+        setTimeout(() => 
+            this.scrollToBottom()
+        , 100);
       },
       error: (err) => {
         console.error('Erreur chargement messages', err);
         this.isLoadingMessages = false;
       },
     });
+  }
+
+  scrollToBottom():void {
+    const container = document.querySelector('.messages-container');
+    if(container){
+      container.scrollTop = container.scrollHeight;
+    }
   }
 
   postMessage(): void {
@@ -102,11 +111,13 @@ export class TopicMessagesDialogComponent implements OnInit {
         next: (newMessage) => {
           this.messages.unshift(newMessage);
           this.newMessageContent = '';
+          setTimeout(()=> this.scrollToBottom(),100);
         },
         error: (err) => {
           console.error("Erreur lors de l'envoi du message", err);
         },
       });
+      this.loadMessages(this.topic.id);
   }
 
   onCloseClick(): void {

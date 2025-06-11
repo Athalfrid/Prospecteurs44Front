@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Nécessaire pour *ngIf, etc.
+import { CommonModule, DatePipe } from '@angular/common'; // Nécessaire pour *ngIf, etc.
 
 // Imports Angular Material nécessaires pour le template
 import {
@@ -29,6 +29,7 @@ import {
   TopicMessagesDialogComponent,
   TopicMessagesDialogData,
 } from './topic-messages/topic-messages.component';
+import { ItalicPipe } from '../../../pipe/italic.pipe';
 
 @Component({
   selector: 'app-forum',
@@ -44,9 +45,11 @@ import {
     MatDialogModule,
     MatGridListModule,
     MatTableModule,
+    ItalicPipe,
   ],
   templateUrl: './forum.component.html',
   styleUrls: ['./forum.component.css'],
+  providers: [DatePipe],
 })
 export class ForumComponent implements OnInit, AfterViewInit {
   // Définir les colonnes à afficher
@@ -61,10 +64,21 @@ export class ForumComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private forumService: ForumService, private dialog: MatDialog) {}
+  constructor(
+    private forumService: ForumService,
+    private dialog: MatDialog,
+    private datePipe: DatePipe
+  ) {}
 
   ngOnInit(): void {
     this.loadTopics();
+
+    this.dataSource.filterPredicate = (data: TopicDTO, filter: string) => {
+      return (
+        data.title.toLowerCase().includes(filter) ||
+        data.content.toLowerCase().includes(filter)
+      );
+    };
   }
 
   ngAfterViewInit(): void {
@@ -76,7 +90,6 @@ export class ForumComponent implements OnInit, AfterViewInit {
       next: (data) => {
         this.dataSource.data = data;
         this.dataSource.paginator = this.paginator;
-        console.log(this.dataSource.data);
       },
       error: (err) =>
         console.error('Erreur lors du chargement des topics !', err),
@@ -89,7 +102,6 @@ export class ForumComponent implements OnInit, AfterViewInit {
       CreateTopicDialogData
     >(CreateTopicComponent, {
       panelClass: 'create-topic',
-      width: '70vw',
       data: { title: '', content: '' },
     });
 
@@ -116,24 +128,32 @@ export class ForumComponent implements OnInit, AfterViewInit {
   }
 
   openConversation(topic: TopicDTO): void {
-    this.dialog.open<TopicMessagesDialogComponent, TopicMessagesDialogData>(
+    const dialogRef = this.dialog.open<
       TopicMessagesDialogComponent,
-      {
-        width: '70vw',
-        height: '80vh',
-        data: {
-          topic: topic,
-          topicId: topic.id!,
-          topicTitle: topic.title!,
-          messages: topic.messages,
-        },
-      }
-    );
+      TopicMessagesDialogData
+    >(TopicMessagesDialogComponent, {
+      width: '70vw',
+      data: {
+        topic: topic,
+        topicId: topic.id!,
+        topicTitle: topic.title!,
+      },
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.loadTopics();
+    });
   }
 
-  getLastMessageContent(topic: TopicDTO): string {
-    return topic.messages && topic.messages.length > 0
-      ? topic.messages[topic.messages.length - 1].createdAt
-      : '';
+  getLastMessageDate(topic: TopicDTO): string {
+    if (topic.messages) {
+      const lastDate = topic.messages.createdAt;
+      return this.datePipe.transform(lastDate, 'medium') || '';
+    }
+    return '';
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

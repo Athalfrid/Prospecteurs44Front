@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { TopicDTO } from '../../dto/forum/TopicDTO';
 import { TopicMessagesCreateDTO } from '../../dto/forum/TopicMessagesCreateDTO';
+import { TopicMessagesDTO } from '../../dto/forum/TopicMessagesDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -36,8 +37,8 @@ export class ForumService {
   }
 
   //Récupérer les messages d'un topic
-  getMessagesByTopic(topicID:number):Observable<any>{
-    return this.http.get(`${this.topicsApiUrl}/${topicID}/messages`)
+  getMessagesByTopic(topicID:number):Observable<TopicMessagesDTO[]>{
+    return this.http.get<TopicMessagesDTO[]>(`${this.topicsApiUrl}/${topicID}/messages`)
   }
 
   // Poster un message dans un topic via /api/topics/{topicId}/messages

@@ -12,20 +12,30 @@ import { ActualitesComponent } from './components/main/actualites/actualites.com
 import { EventComponent } from './components/main/event/event.component';
 import { AlertesosComponent } from './components/main/alertesos/alertesos.component';
 import { AlerteActuelleComponent } from './components/main/alerte-actuelle/alerte-actuelle.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-    {path:'',component:HomeComponent},
-    {path:'association',component:AssociationComponent},
-    {path:'contact',component:ContactComponent},
-    {path:'actualites',component:ActualitesComponent},
-    {path:'events',component:EventComponent},
-    {path:'alertesos',component:AlertesosComponent},
-    {path:'register',component:RegisterComponent},
-    {path:'login',component:LoginComponent},
-    //ROUTES PRIVÉES
-    {path:'alerteEncours',component:AlerteActuelleComponent},
-    {path:'user',component:UserComponent},
-    {path:'forum',component:ForumComponent},
-    {path:'access-denied',component:AccessDeniedComponent},
-    {path:'**',component:NotFoundComponent}
+  { path: '', component: HomeComponent },
+  { path: 'association', component: AssociationComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'actualites', component: ActualitesComponent },
+  { path: 'events', component: EventComponent },
+  { path: 'alertesos', component: AlertesosComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  //ROUTES PRIVÉES -- PROFIL ROLE_USER
+  /** ROUTES ROLE_USER */
+  {
+    path: 'alerteEncours',
+    component: AlerteActuelleComponent,
+    canActivate: [authGuard],
+  },
+  { path: 'user', component: UserComponent, canActivate: [authGuard] },
+  { path: 'forum', component: ForumComponent, canActivate: [authGuard] },
+  //ROUTES PRIVÉES -- PROFIL ROLE_MODERATEUR
+  /** ROUTES ROLE_MODERATEUR */
+  //ROUTES PRIVÉES -- PROFIL ROLE_ADMIN
+  /** ROUTES ROLE_ADMIN */
+  { path: 'access-denied', component: AccessDeniedComponent },
+  { path: '**', component: NotFoundComponent },
 ];
